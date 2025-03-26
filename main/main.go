@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/emirpasic/gods/lists/arraylist"
 	"github.com/gookit/goutil/strutil"
 	"log"
@@ -9,22 +10,26 @@ import (
 func main() {
 	arraylist.New()
 	list := createTestList()
-	printTree(list)
-	//flag, deviceList := getLengthAndDeviceList(list, "101")
-	//if flag {
-	//	value, found1 := deviceList.lengthMap.Get("length")
-	//	if found1 {
-	//		fmt.Println(value.(int))
-	//	}
-	//	fmt.Println("--------------------------------------------------------------")
-	//	listValue, found2 := deviceList.lengthMap.Get("deviceList")
-	//	if found2 {
-	//		ll := listValue.(*arraylist.List)
-	//		fmt.Println(ll.Values())
-	//	}
-	//} else {
-	//	log.Println("错啦错啦")
-	//}
+	//printTree(list)
+	flag, deviceList := getLengthAndDeviceList(list, "101")
+	if flag {
+		value, found1 := deviceList.lengthMap.Get("length")
+		if found1 {
+			fmt.Println(value.(int))
+		}
+		fmt.Println("--------------------------------------------------------------")
+		listValue, found2 := deviceList.lengthMap.Get("deviceList")
+		if found2 {
+			ll := listValue.(*arraylist.List)
+			it := ll.Iterator()
+			for it.Next() {
+				node := it.Value().(*Node) // 类型断言
+				fmt.Println(node.psrId)    // 只打印 psrId
+			}
+		}
+	} else {
+		log.Println("错啦错啦")
+	}
 
 }
 

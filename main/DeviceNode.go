@@ -5,6 +5,7 @@ import (
 	"github.com/emirpasic/gods/lists/arraylist"
 	"github.com/emirpasic/gods/maps/hashmap"
 	"github.com/gookit/goutil/strutil"
+	"log"
 	"strings"
 )
 
@@ -39,7 +40,7 @@ func createTestList() arraylist.List {
 		deviceType: 1,
 		psrId:      "B",
 		length:     5,
-		leftConn:   "A",
+		leftConn:   "B",
 		rightConn:  "E,F",
 		child:      *arraylist.New(),
 		lengthMap:  *hashmap.New(),
@@ -49,7 +50,7 @@ func createTestList() arraylist.List {
 		deviceType: 1,
 		psrId:      "C",
 		length:     10,
-		leftConn:   "A",
+		leftConn:   "C",
 		rightConn:  "G,H",
 		child:      *arraylist.New(),
 		lengthMap:  *hashmap.New(),
@@ -59,7 +60,7 @@ func createTestList() arraylist.List {
 		deviceType: 1,
 		psrId:      "D",
 		length:     15,
-		leftConn:   "A",
+		leftConn:   "D",
 		rightConn:  "I,J",
 		child:      *arraylist.New(),
 		lengthMap:  *hashmap.New(),
@@ -70,7 +71,7 @@ func createTestList() arraylist.List {
 		deviceType: 1,
 		psrId:      "E",
 		length:     20,
-		leftConn:   "B",
+		leftConn:   "E",
 		rightConn:  "K,L",
 		child:      *arraylist.New(),
 		lengthMap:  *hashmap.New(),
@@ -80,7 +81,7 @@ func createTestList() arraylist.List {
 		deviceType: 1,
 		psrId:      "F",
 		length:     25,
-		leftConn:   "B",
+		leftConn:   "F",
 		rightConn:  "M,N",
 		child:      *arraylist.New(),
 		lengthMap:  *hashmap.New(),
@@ -90,7 +91,7 @@ func createTestList() arraylist.List {
 		deviceType: 1,
 		psrId:      "G",
 		length:     30,
-		leftConn:   "C",
+		leftConn:   "G",
 		rightConn:  "O,P",
 		child:      *arraylist.New(),
 		lengthMap:  *hashmap.New(),
@@ -100,7 +101,7 @@ func createTestList() arraylist.List {
 		deviceType: 1,
 		psrId:      "H",
 		length:     35,
-		leftConn:   "C",
+		leftConn:   "H",
 		rightConn:  "Q,R",
 		child:      *arraylist.New(),
 		lengthMap:  *hashmap.New(),
@@ -110,7 +111,7 @@ func createTestList() arraylist.List {
 		deviceType: 1,
 		psrId:      "I",
 		length:     40,
-		leftConn:   "D",
+		leftConn:   "I",
 		rightConn:  "S,T",
 		child:      *arraylist.New(),
 		lengthMap:  *hashmap.New(),
@@ -120,7 +121,7 @@ func createTestList() arraylist.List {
 		deviceType: 1,
 		psrId:      "J",
 		length:     45,
-		leftConn:   "D",
+		leftConn:   "J",
 		rightConn:  "U,V",
 		child:      *arraylist.New(),
 		lengthMap:  *hashmap.New(),
@@ -131,7 +132,7 @@ func createTestList() arraylist.List {
 		deviceType: 1,
 		psrId:      "K",
 		length:     50,
-		leftConn:   "E",
+		leftConn:   "K",
 		rightConn:  "",
 		child:      *arraylist.New(),
 		lengthMap:  *hashmap.New(), // K 是终端节点
@@ -141,7 +142,7 @@ func createTestList() arraylist.List {
 		deviceType: 1,
 		psrId:      "L",
 		length:     55,
-		leftConn:   "E",
+		leftConn:   "L",
 		rightConn:  "",
 		child:      *arraylist.New(),
 		lengthMap:  *hashmap.New(), // L 是终端节点
@@ -200,11 +201,15 @@ func findNode(list arraylist.List, parentId string) (bool, *Node) {
 		if ok {
 			return p.leftConn == parentId
 		}
+		log.Println(parentId + "没找到")
 		return false
 	})
 	if value != nil {
+		log.Println("找到了")
+		log.Printf(parentId + "--------------" + value.(*Node).psrId)
 		return true, value.(*Node)
 	}
+	log.Println(parentId + "没找到")
 	return false, nil
 }
 
