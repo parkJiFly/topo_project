@@ -37,7 +37,7 @@ func createTestList() arraylist.List {
 
 	// 第2层
 	node2 := &Node{
-		deviceType: 1,
+		deviceType: 0,
 		psrId:      "B",
 		length:     5,
 		leftConn:   "B",
